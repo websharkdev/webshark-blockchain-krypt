@@ -1,0 +1,50 @@
+@import '@/styles/globals'
+@import '@/styles/variables'
+
+.Root
+  color: $color-main-black
+  width: calc(100% - 180px)
+  min-height: 100vh
+  margin: 0 auto
+
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-wrap: nowrap
+
+
+.WalletBTN
+  opacity: .8
+  background: none 
+  overflow: hidden
+  width: 220px
+  border-radius: 4px
+  & div
+    z-index: 5
+    color: #f2f2f2
+    font-weight: 600
+    font-size: 14px
+  &::before 
+    background: linear-gradient(95.54deg, #10002B -12.24%, #7B2CBF 62.54%, #B8B8FF 102.56%)
+    animation: OpacityAnim 4s ease-in-out 0s infinite alternate 
+  &::after 
+    background: linear-gradient(95.54deg, #DEC9E9 -12.24%, #C77DFF 19.94%, #7B2CBF 72.87%) 
+    animation: OpacityAnim 4s ease-in-out 0s infinite alternate 
+
+  &::after, &::before 
+    content: '' 
+    display: block 
+    position: absolute 
+    top: 0 
+    bottom: 0 
+    left: 0 
+    right: 0 
+
+@keyframes OpacityAnim 
+    0%
+      opacity: 1
+    50% 
+      opacity: .6
+    100% 
+      opacity: 1
+
