@@ -1,27 +1,67 @@
-import { Box, Grid, styled } from '@mui/material'
-import { FC } from 'react'
+import { Box, Grid, Paper, TextField, styled } from '@mui/material'
+import { FC, useState } from 'react'
 
 import { CardItem } from './CardItem'
 
-type Props = {}
+type Props = {
+  address: string
+}
 
-const Root = styled(Box)(({ theme }) => ({}))
+type CardFormProps = {
+  address: string
+  amount: number
+  keyword: string
+  message: string
+}
 
-export const Card: FC<Props> = (props) => {
+const Root = styled(Box)(({ theme }) => ({
+  '& .home-card--form': {
+    width: 320,
+    '& .home-card--formBox': {
+      borderRadius: 4,
+      background: theme.palette.background.paper,
+      width: '100%',
+      padding: '18px 12px',
+    },
+  },
+}))
+
+export const Card: FC<Props> = ({ address }) => {
+  const [cardForm, setCardForm] = useState<CardFormProps>({
+    address: '',
+    amount: 0,
+    keyword: '',
+    message: '',
+  })
   return (
     <Root className="home-card--container">
-      <Grid container wrap="nowrap" direction={'column'} justifyContent="center" alignItems={'center'}>
+      <Grid container wrap="nowrap" direction={'column'} justifyContent="center" alignItems={'center'} rowSpacing={2}>
         <Grid
           item
+          xs={12}
           sx={{
-            width: '100%',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
           }}
         >
-          <CardItem />
+          <CardItem address={address} />
+        </Grid>
+        <Grid item xs={12} className="home-card--form">
+          <Grid container className="home-card--formBox">
+            <Grid item xs={12}>
+              <TextField
+                required
+                id=""
+                placeholder="Address to..."
+                onChange={(e) => setCardForm({ ...cardForm, address: e.target.value })}
+                value={cardForm.address || ''}
+                type="text"
+                fullWidth
+              />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Root>

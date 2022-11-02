@@ -227,6 +227,26 @@ theme.components = {
       },
     },
   },
+  MuiTextField: {
+    variants: [
+      {
+        props: {
+          variant: 'outlined',
+        },
+        style: {
+          '& fieldset': {
+            border: '1px solid #9381FF',
+            borderRadius: 4,
+          },
+          '& .Mui-focused': {
+            '& fieldset.MuiOutlinedInput-notchedOutline': {
+              border: '1px solid #10002B',
+            },
+          },
+        },
+      },
+    ],
+  },
   MuiInputLabel: {
     styleOverrides: {
       root: {
@@ -279,40 +299,16 @@ theme.components = {
         },
         '&:hover': {
           backgroundColor: 'rgba(239, 118, 31, 0.08)',
-          boxShadow: '0px 4px 12px rgba(248, 139, 22, 0.06)',
+          // boxShadow: '0px 4px 12px rgba(248, 139, 22, 0.06)',
         },
         '&.Mui-focused': {
           backgroundColor: 'rgba(239, 118, 31, 0.08)',
-          boxShadow: '0px 4px 12px rgba(248, 139, 22, 0.06)',
+          // boxShadow: '0px 4px 12px rgba(248, 139, 22, 0.06)',
         },
       },
     },
   },
-  MuiOutlinedInput: {
-    variants: [
-      {
-        props: { color: 'primary' },
-        style: {
-          border: '1px solid #C4C2BC',
-          overflow: 'hidden',
-          borderRadius: 12,
-          ':hover': {},
-        },
-      },
-    ],
-    styleOverrides: {
-      root: {
-        color: 'rgba(31, 23, 18, 0.64)',
-      },
-      input: {
-        color: 'rgba(31, 23, 18, 0.64)',
-        fontWeight: 500,
-        '&.MuiInputBase-inputAdornedStart': {
-          marginLeft: 8,
-        },
-      },
-    },
-  },
+
   MuiLink: {
     defaultProps: {
       underline: 'none',

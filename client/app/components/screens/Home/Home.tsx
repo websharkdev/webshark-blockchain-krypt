@@ -27,10 +27,11 @@ const Root = styled(Grid)(({ theme }) => ({
 
   '& .home-content--table': {
     border: '1px solid #fff',
-    padding: '20px 30px',
+    marginTop: 24,
     borderRadius: theme.shape.borderRadius,
     '& .home-content--tableItem': {
-      padding: '20px',
+      padding: '24px',
+      fontWeight: 600,
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -39,11 +40,15 @@ const Root = styled(Grid)(({ theme }) => ({
         borderRight: '1px solid #fff',
         borderLeft: '1px solid #fff',
       },
+      '&.home-content--tableItem-top3': {
+        borderBottom: '1px solid #fff',
+      },
     },
   },
 }))
 
 export const Home: FC<Props> = (props) => {
+  const address = ''
   return (
     <Root container className={styles.Root}>
       <Grid item xs={4}>
@@ -66,7 +71,9 @@ export const Home: FC<Props> = (props) => {
                 item
                 key={row.id}
                 minWidth={'33%'}
-                className={`home-content--tableItem ${index % 3 === 1 ? 'home-content--tableItem-middle' : ''}`}
+                className={`home-content--tableItem ${index % 3 === 1 ? 'home-content--tableItem-middle' : ''} ${
+                  index < 3 ? 'home-content--tableItem-top3' : ''
+                }`}
               >
                 {row.name}
               </Grid>
@@ -75,7 +82,7 @@ export const Home: FC<Props> = (props) => {
         </Box>
       </Grid>
       <Grid item xs={7}>
-        <Card />
+        <Card address={address} />
       </Grid>
     </Root>
   )
