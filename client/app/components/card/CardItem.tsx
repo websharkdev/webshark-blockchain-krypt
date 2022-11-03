@@ -10,7 +10,8 @@ type Props = {
 
 const Root = styled(Grid)(({ theme }) => ({
   minHeight: 188,
-  width: 320,
+  minWidth: 320,
+  width: '100%',
   padding: '24px 32px',
   borderRadius: theme.shape.borderRadius,
   background: 'linear-gradient(95.54deg, #DEC9E9 -12.24%, #C77DFF 19.94%, #7B2CBF 72.87%)',
