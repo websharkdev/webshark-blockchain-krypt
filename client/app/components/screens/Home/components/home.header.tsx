@@ -1,15 +1,14 @@
 import { Box, Button, Grid, Typography, styled } from '@mui/material'
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 
 import { Card } from '@/components/card'
 import { data } from '@/components/layout/header/data'
 
 import styles from '@/screens/Home/home.module.sass'
 
-type Props = {
-  address: string
-  connectWallet: () => void
-}
+import { TransactionContext } from '@/providers/TransactionContext'
+
+type Props = {}
 
 const Root = styled(Grid)(({ theme }) => ({
   '& .home-content--container': {
@@ -50,7 +49,10 @@ const Root = styled(Grid)(({ theme }) => ({
   },
 }))
 
-export const HomeHeader: FC<Props> = ({ address, connectWallet }) => {
+export const HomeHeader: FC<Props> = (props) => {
+  // @ts-ignore
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
+
   return (
     <Root container className={styles.Root}>
       <Grid item xs={4}>
@@ -64,9 +66,9 @@ export const HomeHeader: FC<Props> = ({ address, connectWallet }) => {
           <Button
             className={`home-content--button ${styles.WalletBTN}`}
             onClick={connectWallet}
-            disabled={address.length > 0}
+            disabled={currentAccount.length > 0}
           >
-            <Typography component={'div'}>{!address ? 'Connect Wallet' : 'Account connected'}</Typography>
+            <Typography component={'div'}>{!currentAccount ? 'Connect Wallet' : 'Account connected'}</Typography>
           </Button>
         </Box>
 
@@ -88,7 +90,7 @@ export const HomeHeader: FC<Props> = ({ address, connectWallet }) => {
         </Box>
       </Grid>
       <Grid item xs={7}>
-        <Card address={address} />
+        <Card address={currentAccount} />
       </Grid>
     </Root>
   )
