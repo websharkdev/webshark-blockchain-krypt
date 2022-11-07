@@ -15,3 +15,13 @@ export interface CardFormProps {
   message: string
   keyword: string
 }
+
+export interface TranscationsDataItem {
+  id: number
+  url: string
+  message: string
+  timestamp: string
+  addressFrom: string
+  amount: string
+  addressTo: string
+}

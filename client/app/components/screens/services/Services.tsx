@@ -4,7 +4,7 @@ import { FC } from 'react'
 
 import styles from '@/screens/Home/home.module.sass'
 
-import { data } from '../data'
+import { data } from './data'
 
 type Props = {}
 
@@ -14,7 +14,7 @@ const Root = styled(Grid)(({ theme }) => ({
   },
 }))
 
-export const HomeServices: FC<Props> = (props) => {
+export const Services: FC<Props> = (props) => {
   return (
     <Root container className={styles.Services}>
       <Grid item xs={4}>
