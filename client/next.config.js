@@ -10,7 +10,6 @@ const nextConfig = {
   experimental: {
     output: 'standalone',
   },
-
   images: {
     domains: ['images.unsplash.com', 'cdn.svgporn.com'],
   },

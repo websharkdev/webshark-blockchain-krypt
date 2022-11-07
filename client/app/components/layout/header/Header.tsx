@@ -2,14 +2,13 @@ import { Box, Button, Grid, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
+
+import { TransactionContext } from '@/providers/TransactionContext'
 
 import { data } from './data'
 
-type Props = {
-  authorized: boolean
-  setAuthorized: (e: boolean) => void
-}
+type Props = {}
 
 const Root = styled(Grid)(({ theme }) => ({
   padding: '24px 68px',
@@ -23,7 +22,9 @@ const Root = styled(Grid)(({ theme }) => ({
   },
 }))
 
-export const Header: FC<Props> = ({ authorized, setAuthorized }) => {
+export const Header: FC<Props> = (props) => {
+  // @ts-ignore
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
   const router = useRouter()
   return (
     <Root container wrap="nowrap" justifyContent={'space-between'} alignItems="center">
@@ -40,7 +41,7 @@ export const Header: FC<Props> = ({ authorized, setAuthorized }) => {
         </Box>
       </Grid>
       <Grid item xs={'auto'}>
-        {authorized ? <Button>Log out</Button> : <Button>Log in</Button>}
+        {currentAccount ? <Button>Log out</Button> : <Button onClick={connectWallet}>Log in</Button>}
       </Grid>
     </Root>
   )
