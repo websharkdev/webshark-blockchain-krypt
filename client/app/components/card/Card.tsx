@@ -14,6 +14,9 @@ const Root = styled(Box)(({ theme }) => ({
   '& .home-card--form': {
     marginTop: 24,
     width: 320,
+    [theme.breakpoints.down(378)]: {
+      width: '100%',
+    },
     '& .home-card--formBox': {
       borderRadius: 4,
       background: theme.palette.background.paper,
@@ -46,17 +49,17 @@ export const Card: FC<Props> = ({ address }) => {
       <Grid container wrap="nowrap" direction={'column'} justifyContent="center" alignItems={'center'} rowSpacing={2}>
         <Grid
           item
-          xs={12}
           sx={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
+            width: '100%',
           }}
         >
           <CardItem address={address} />
         </Grid>
-        <Grid item xs={12} className="home-card--form">
+        <Grid item width="100%" className="home-card--form">
           <Grid container className="home-card--formBox" rowSpacing={1.5}>
             <Grid item xs={12}>
               <TextField

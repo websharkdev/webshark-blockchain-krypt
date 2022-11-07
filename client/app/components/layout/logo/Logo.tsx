@@ -8,7 +8,7 @@ import LogoIcon from '@/assets/icons/logos/logo.svg'
 const Logo: FC = () => (
   <Link href="/">
     <MuiLink className="logo" display="flex">
-      <Image src={LogoIcon} alt="logo-icon" width={48} height={'100%'} />
+      <Image src={LogoIcon} alt="logo-icon" width={120} height={'100%'} />
     </MuiLink>
   </Link>
 )

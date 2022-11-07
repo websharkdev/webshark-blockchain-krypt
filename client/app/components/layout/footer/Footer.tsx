@@ -24,6 +24,7 @@ const Root = styled(Grid)(({ theme }) => ({
       background: '#B8B8FF',
     },
     '& .footer-leftSide--createdWithLove': {
+      width: '100%',
       '& span': {
         color: '#f00',
       },
@@ -64,23 +65,10 @@ const Root = styled(Grid)(({ theme }) => ({
 export const Footer: FC<Props> = (props) => {
   return (
     <Root container>
-      <Grid item xs={8} className="footer-leftSide">
-        <Grid container>
-          {/* <Grid item xs={9}>
-            <Box>
-              <Typography variant="h4">menu.</Typography>
-              <Box className="footer-leftSide--divider" />
-              <Box className="footer-leftSide--menu">
-                <Link href="/">home</Link>
-                <Link href="/">how to help Ukraine?</Link>
-                <Link href="/">home</Link>
-                <Link href="/">home</Link>
-                <Link href="/">home</Link>
-              </Box>
-            </Box>
-          </Grid> */}
-          <Grid item xs={5}>
-            <Box width={170}>
+      <Grid item xs={12} md={8} className="footer-leftSide">
+        <Grid container rowSpacing={{ xs: 4, md: 0 }} columnSpacing={{ xs: 0, md: 4 }}>
+          <Grid item xs={12} md={5}>
+            <Box width={{ md: 170, xs: 220 }}>
               <Typography variant="h4">Bortnytskyi Alexey.</Typography>
               <Box className="footer-leftSide--divider" />
               <Typography variant="body2" fontWeight={600} mt={3}>
@@ -89,14 +77,14 @@ export const Footer: FC<Props> = (props) => {
             </Box>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={12} md={2}>
             <Typography variant="h6" className="footer-leftSide--createdWithLove">
               created in 2022 .//. with <span>❤</span>
             </Typography>
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={4} className="footer-rightSide">
+      <Grid item xs={12} md={4} className="footer-rightSide">
         <Grid container rowSpacing={2}>
           <Grid item xs={12}>
             <Box className="footer-rightSide--divider" />
