@@ -1,6 +1,7 @@
 import { Snackbar } from '@mui/material'
 import { ethers } from 'ethers'
 import React, { FC, useEffect, useState } from 'react'
+import { CardFormProps } from 'shared/types/home'
 
 import { contractABI, contractAddress } from '@/utils/constants'
 
@@ -14,11 +15,7 @@ export const getEthereumContact = () => {
   const signer = provider.getSigner()
   const transcationContract = new ethers.Contract(contractAddress, contractABI, signer)
 
-  console.log({
-    provider,
-    signer,
-    transcationContract,
-  })
+  return transcationContract
 }
 
 type Props = {
@@ -28,6 +25,8 @@ type Props = {
 export const TransactionProvider: FC<Props> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [currentAccount, setCurrentAccount] = useState('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [transactionCount, setTransactionCount] = useState(0)
   const [wallet, setWallet] = useState({
     isConnect: true,
     address: '',
@@ -54,8 +53,47 @@ export const TransactionProvider: FC<Props> = ({ children }) => {
     }
   }
 
+  const sendTransaction = async ({ address, amount, message, keyword }: CardFormProps) => {
+    try {
+      if (ethereum) {
+        const transactionContract = getEthereumContact()
+        const parsedAmount = ethers.utils.parseEther(amount)
+
+        await ethereum.request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: currentAccount,
+              to: address,
+              gas: '0x5208', // 21000 GWEI
+              value: parsedAmount._hex,
+            },
+          ],
+        })
+
+        const transactionHash = await transactionContract.addToBlockchain(address, parsedAmount, message, keyword)
+        setIsLoading(true)
+
+        console.log(`Loading - ${transactionHash.hash}`)
+        await transactionHash.wait()
+        console.log(`Success - ${transactionHash.hash}`)
+        setIsLoading(false)
+
+        // const transactionCount = await transactionContract.getTransactionCount()
+        // setTransactionCount(transactionCount.toNumber())
+        // window.localStorage.setItem('transaction_count', transactionCount.toNumber())
+      } else {
+        console.log('No ethereum object')
+      }
+    } catch (error) {
+      console.log(error)
+
+      throw new Error('No ethereum object')
+    }
+  }
+
   return (
-    <TransactionContext.Provider value={{ connectWallet, currentAccount: currentAccount }}>
+    <TransactionContext.Provider value={{ connectWallet, currentAccount: currentAccount, sendTransaction }}>
       {/* <Snackbar open={isOpen} autoHideDuration={6000} message="Please, install MetaMask" /> */}
       {/* {wallet.isConnect ? '' : 'INSTALL METAMASK'} */}
       {children}

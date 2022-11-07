@@ -9,11 +9,9 @@ export interface HomeSwiperItem {
   image: Image
 }
 
-/*
-    TODO
-
-    01. Add folder hooks
-        001. check best practicals of custom hooks
-    02. Check react-hanger (it's shit 4 do some changes with arrays)
-
-*/
+export interface CardFormProps {
+  address: string
+  amount: string
+  message: string
+  keyword: string
+}
