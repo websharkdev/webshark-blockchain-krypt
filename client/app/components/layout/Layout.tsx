@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, useState } from 'react'
+import React, { FC, ReactElement } from 'react'
 
 import { Footer } from '@/components/layout/footer'
 import { Header } from '@/components/layout/header'
@@ -6,10 +6,9 @@ import { Header } from '@/components/layout/header'
 import styles from './layout.module.sass'
 
 const Layout: FC<{ children: ReactElement }> = ({ children }) => {
-  const [authorized, setAuthorized] = useState<boolean>(false)
   return (
     <div className={styles.layout}>
-      <Header authorized={authorized} setAuthorized={setAuthorized} />
+      <Header />
       <div className={styles.page}> {children}</div>
       <Footer />
     </div>

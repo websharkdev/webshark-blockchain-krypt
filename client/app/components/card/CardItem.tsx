@@ -35,9 +35,11 @@ export const CardItem: FC<Props> = ({ address }) => {
       </Grid>
       <Grid item width="100%">
         <Box className="card-item--container" flexDirection="column">
-          <Typography variant="body2" color="#fff">
-            {address ? address : '...'}
-          </Typography>
+          <Tooltip title={address ? address : ''}>
+            <Typography variant="body2" color="#fff">
+              {address ? `${address.slice(0, 6)}...${address.slice(38, 42)}` : '...'}
+            </Typography>
+          </Tooltip>
           <Typography variant="h6" fontWeight={600} color="#fff">
             Ethereum
           </Typography>

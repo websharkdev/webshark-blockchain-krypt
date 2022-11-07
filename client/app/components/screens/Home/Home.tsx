@@ -1,7 +1,9 @@
 import { Grid, styled } from '@mui/material'
-import { FC } from 'react'
+import { FC, useContext } from 'react'
 
 import styles from '@/screens/Home/home.module.sass'
+
+import { TransactionContext } from '@/providers/TransactionContext'
 
 import { HomeHeader, HomeServices } from './components'
 
@@ -13,11 +15,13 @@ const Root = styled(Grid)(({ theme }) => ({
 }))
 
 export const Home: FC<Props> = (props) => {
-  const address = ''
+  // @ts-ignore
+  const { connectWallet, currentAccount } = useContext(TransactionContext)
+
   return (
     <Root container className={styles.Root} rowGap={2}>
       <Grid item width={'100%'}>
-        <HomeHeader address={address} />
+        <HomeHeader address={currentAccount} connectWallet={connectWallet} />
       </Grid>
       <Grid item width={'100%'}>
         <HomeServices />

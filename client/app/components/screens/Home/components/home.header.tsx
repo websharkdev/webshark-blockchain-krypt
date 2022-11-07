@@ -8,6 +8,7 @@ import styles from '@/screens/Home/home.module.sass'
 
 type Props = {
   address: string
+  connectWallet: () => void
 }
 
 const Root = styled(Grid)(({ theme }) => ({
@@ -49,7 +50,7 @@ const Root = styled(Grid)(({ theme }) => ({
   },
 }))
 
-export const HomeHeader: FC<Props> = ({ address }) => {
+export const HomeHeader: FC<Props> = ({ address, connectWallet }) => {
   return (
     <Root container className={styles.Root}>
       <Grid item xs={4}>
@@ -60,8 +61,12 @@ export const HomeHeader: FC<Props> = ({ address }) => {
           <Typography variant="body2" className="home-content--text">
             Explore the crypto world. Buy and sell cryptocurrencies easily on {data.companyName}.
           </Typography>
-          <Button className={`home-content--button ${styles.WalletBTN}`}>
-            <Typography component={'div'}>Connect Wallet</Typography>
+          <Button
+            className={`home-content--button ${styles.WalletBTN}`}
+            onClick={connectWallet}
+            disabled={address.length > 0}
+          >
+            <Typography component={'div'}>{!address ? 'Connect Wallet' : 'Account connected'}</Typography>
           </Button>
         </Box>
 

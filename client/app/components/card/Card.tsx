@@ -1,17 +1,13 @@
 import { Box, Button, Divider, Grid, Paper, TextField, styled } from '@mui/material'
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
+import { CardFormProps } from 'shared/types/home'
+
+import { TransactionContext } from '@/providers/TransactionContext'
 
 import { CardItem } from './CardItem'
 
 type Props = {
   address: string
-}
-
-type CardFormProps = {
-  address: string
-  amount: number
-  keyword: string
-  message: string
 }
 
 const Root = styled(Box)(({ theme }) => ({
@@ -28,12 +24,23 @@ const Root = styled(Box)(({ theme }) => ({
 }))
 
 export const Card: FC<Props> = ({ address }) => {
+  // @ts-ignore
+  const { sendTransaction } = useContext(TransactionContext)
   const [cardForm, setCardForm] = useState<CardFormProps>({
     address: '',
-    amount: 0,
+    amount: '',
     keyword: '',
     message: '',
   })
+
+  const handleTransaction = () => {
+    const { address, amount, message, keyword } = cardForm
+
+    if (address === '' && +amount === 0 && keyword === '' && message === '') return
+
+    sendTransaction(cardForm)
+  }
+
   return (
     <Root className="home-card--container">
       <Grid container wrap="nowrap" direction={'column'} justifyContent="center" alignItems={'center'} rowSpacing={2}>
@@ -67,10 +74,21 @@ export const Card: FC<Props> = ({ address }) => {
                 required
                 id="cardFormAmount"
                 placeholder="Amount (ETH)"
-                onChange={(e) => setCardForm({ ...cardForm, amount: +e.target.value })}
+                onChange={(e) => setCardForm({ ...cardForm, amount: e.target.value })}
                 value={cardForm.amount || ''}
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
-                type="number"
+                type="text"
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                required
+                id="cardFormKeyword"
+                placeholder="Enter keyword"
+                onChange={(e) => setCardForm({ ...cardForm, keyword: e.target.value })}
+                value={cardForm.keyword || ''}
+                type="text"
                 fullWidth
               />
             </Grid>
@@ -89,7 +107,7 @@ export const Card: FC<Props> = ({ address }) => {
               <Divider />
             </Grid>
             <Grid item xs={12}>
-              <Button color="primary" variant="contained" fullWidth>
+              <Button color="primary" variant="contained" fullWidth onClick={handleTransaction}>
                 Send now
               </Button>
             </Grid>
