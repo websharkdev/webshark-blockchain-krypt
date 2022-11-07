@@ -2,27 +2,37 @@ import { Box, Button, Grid, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import { FC } from 'react'
 
-import styles from '@/screens/Home/home.module.sass'
+import styles from '@/screens/services/services.module.sass'
 
 import { data } from './data'
 
 type Props = {}
 
 const Root = styled(Grid)(({ theme }) => ({
-  '& .home-services--reasons-item-title': {
-    marginBottom: 4,
+  '& .services-container--title': {
+    width: 550,
+    fontSize: 32,
+    position: 'relative',
+    zIndex: 5,
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+      fontSize: 24,
+    },
+  },
+  '& .services--reasons': {
+    marginTop: 16,
   },
 }))
 
 export const Services: FC<Props> = (props) => {
   return (
     <Root container className={styles.Services}>
-      <Grid item xs={4}>
-        <Typography variant={'h2'} width="520px">
+      <Grid item xs={12} md={6} lg={4}>
+        <Typography variant={'h2'} className="services-container--title">
           Services that we continue to improve
         </Typography>
       </Grid>
-      <Grid item xs={6} className="home-services--reasons">
+      <Grid item xs={12} md={6} lg={6} className="services--reasons">
         <Grid container>
           {data.reasons.map((item) => (
             <Grid
@@ -36,11 +46,11 @@ export const Services: FC<Props> = (props) => {
               <Box className={styles.ServicesReasonItem_img}>
                 <Image src={item.icon.src} alt={item.icon.alt} width="64px" height={'64px'} />
               </Box>
-              <Box className={styles.ServicesReasonItem_text}>
-                <Typography className="home-services--reasons-item-title" variant="h6">
+              <Box>
+                <Typography className={styles.ServicesReasonItem_title} variant="h6">
                   {item.title}
                 </Typography>
-                <Typography className="home-services--reasons-item-text" variant="body1">
+                <Typography className={styles.ServicesReasonItem_text} variant="body1">
                   {item.text}
                 </Typography>
               </Box>

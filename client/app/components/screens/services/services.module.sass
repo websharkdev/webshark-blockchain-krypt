@@ -1,0 +1,79 @@
+@import '@/styles/globals'
+@import '@/styles/variables'
+
+
+.Services
+    min-height: 600px
+    width: 100%
+    height: 100%
+    display: flex
+    justify-content: center
+    align-items: center
+    position: relative
+    &::before
+        content: ''
+        width: 600px
+        height: 600px
+        position: absolute
+        right: 0
+        bottom: 0
+        background: #B8B8FF
+        z-index: 0
+        opacity: 0.7
+        filter: blur(150px)
+
+.ServicesReasonItem
+    height: 100%
+    max-width: 670px
+    max-height: 110px
+    display: flex
+    justify-content: space-between
+    width: 100%
+    padding: 16px 32px
+    flex-wrap: nowrap
+    align-items: center
+    border-radius: 16px
+    z-index: 2
+    position: static
+
+    background: rgba(255, 255, 255, 0.2)
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+    backdrop-filter: blur(8px)
+    border: 1px solid rgba(255, 255, 255, 0.7)
+    & .ServicesReasonItem_img
+        margin-right: 15px
+    & .ServicesReasonItem_title
+        margin-bottom: 4px
+        font-size: 24px
+    & .ServicesReasonItem_text
+        font-size: 16px
+
+@media screen and ( min-width: 0 ) and (max-width: 900px)
+    .Services
+        min-height: 420px
+        padding: 20px 0
+        &::before
+            width: 320px
+            height: 320px
+
+    .ServicesReasonItem
+        max-height: max-content
+        max-width: max-content
+        width: calc(100% - 16px)
+        padding: 16px
+
+        background: rgba(255, 255, 255, 1)
+        backdrop-filter: unset
+@media screen and ( min-width: 471px ) and (max-width: 900px)
+    .ServicesReasonItem
+        & .ServicesReasonItem_title
+            font-size: 18px
+        & .ServicesReasonItem_text
+            font-size: 14px
+
+@media screen and ( min-width: 0 ) and (max-width: 470px)
+    .ServicesReasonItem
+        & .ServicesReasonItem_title
+            font-size: 16px
+        & .ServicesReasonItem_text
+            font-size: 12px

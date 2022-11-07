@@ -2,6 +2,8 @@ import { Box, Grid, Tooltip, Typography, styled } from '@mui/material'
 import Image from 'next/image'
 import { FC } from 'react'
 
+import styles from '@/components/card/card.module.sass'
+
 import { EthereumIcon, InfoIcon } from '@/assets/icons/ui'
 
 type Props = {
@@ -10,7 +12,6 @@ type Props = {
 
 const Root = styled(Grid)(({ theme }) => ({
   minHeight: 188,
-  minWidth: 320,
   width: '100%',
   padding: '24px 32px',
   borderRadius: theme.shape.borderRadius,
@@ -26,7 +27,14 @@ const Root = styled(Grid)(({ theme }) => ({
 
 export const CardItem: FC<Props> = ({ address }) => {
   return (
-    <Root container wrap="nowrap" direction="column" justifyContent="space-between" alignItems="center">
+    <Root
+      container
+      wrap="nowrap"
+      direction="column"
+      justifyContent="space-between"
+      alignItems="center"
+      className={styles.WalletCard}
+    >
       <Grid item width="100%">
         <Box className="card-item--container">
           <Image src={EthereumIcon} alt="ethereum-icon" width={32} height={32} />

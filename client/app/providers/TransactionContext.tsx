@@ -26,7 +26,7 @@ export const TransactionProvider: FC<Props> = ({ children }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [currentAccount, setCurrentAccount] = useState('')
   const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [transactionCount, setTransactionCount] = useState(0)
+  const [submitedTransaction, setSubmitedTransaction] = useState(false)
   const [wallet, setWallet] = useState({
     isConnect: true,
     address: '',
@@ -77,6 +77,12 @@ export const TransactionProvider: FC<Props> = ({ children }) => {
         console.log(`Loading - ${transactionHash.hash}`)
         await transactionHash.wait()
         console.log(`Success - ${transactionHash.hash}`)
+
+        setSubmitedTransaction(true)
+        setTimeout(() => {
+          setSubmitedTransaction(false)
+        }, 6000)
+
         setIsLoading(false)
 
         // const transactionCount = await transactionContract.getTransactionCount()
@@ -94,7 +100,8 @@ export const TransactionProvider: FC<Props> = ({ children }) => {
 
   return (
     <TransactionContext.Provider value={{ connectWallet, currentAccount: currentAccount, sendTransaction }}>
-      {/* <Snackbar open={isOpen} autoHideDuration={6000} message="Please, install MetaMask" /> */}
+      <Snackbar open={isOpen} autoHideDuration={6000} message="Please, install MetaMask" />
+      <Snackbar open={isLoading} autoHideDuration={6000} message="Done!" />
       {/* {wallet.isConnect ? '' : 'INSTALL METAMASK'} */}
       {children}
     </TransactionContext.Provider>
