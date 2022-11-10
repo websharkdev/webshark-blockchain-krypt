@@ -20,6 +20,7 @@ const Meta: FC<IMeta> = ({ title, children, description, image }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5.0" />
         <link rel="manifest" href="/manifest.json" />
         <Favicons />
+
         {description ? (
           <>
             <meta itemProp="description" name="description" content={getOnlyText(description, 152)} />
