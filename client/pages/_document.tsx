@@ -16,10 +16,11 @@ const Document = () => (
 
       <Script
         strategy="lazyOnload"
+        id="google-analytics__lib"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
 
-      <Script strategy="lazyOnload">
+      <Script id="google-analytics__connect" strategy="lazyOnload">
         {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
