@@ -17,7 +17,7 @@ const Document = () => (
       <Script
         strategy="lazyOnload"
         id="google-analytics__lib"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+        src={`https://www.googletagmanager.com/gtag/js?id=G-SM1PM8W9TH`}
       />
 
       <Script id="google-analytics__connect" strategy="lazyOnload">
@@ -25,7 +25,7 @@ const Document = () => (
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+            gtag('config', 'G-SM1PM8W9TH', {
             page_path: window.location.pathname,
             });
         `}
