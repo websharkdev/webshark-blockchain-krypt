@@ -64,7 +64,7 @@ const Root = styled(Grid)(({ theme }) => ({
 
 export const HomeHeader: FC<Props> = (props) => {
   // @ts-ignore
-  const { connectWallet, currentAccount } = useContext(TransactionContext)
+  const { connectWallet, currentAccount, disconectWallet } = useContext(TransactionContext)
 
   return (
     <Root container wrap="wrap" className={styles.Root}>
@@ -78,8 +78,7 @@ export const HomeHeader: FC<Props> = (props) => {
           </Typography>
           <Button
             className={`home-content--button ${styles.WalletBTN}`}
-            onClick={connectWallet}
-            disabled={currentAccount.length > 0}
+            onClick={!currentAccount ? connectWallet : disconectWallet}
           >
             <Typography component={'div'}>{!currentAccount ? 'Connect Wallet' : 'Account connected'}</Typography>
           </Button>

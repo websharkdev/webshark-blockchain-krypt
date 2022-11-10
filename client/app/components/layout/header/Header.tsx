@@ -43,7 +43,7 @@ const Root = styled(Grid)(({ theme }) => ({
 
 export const Header: FC<Props> = (props) => {
   // @ts-ignore
-  const { connectWallet, currentAccount } = useContext(TransactionContext)
+  const { connectWallet, currentAccount, disconectWallet } = useContext(TransactionContext)
   const router = useRouter()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -69,7 +69,11 @@ export const Header: FC<Props> = (props) => {
         </Box>
       </Grid>
       <Grid item className="mobile-hidden" xs={'auto'}>
-        {currentAccount ? <Button>Log out</Button> : <Button onClick={connectWallet}>Log in</Button>}
+        {currentAccount ? (
+          <Button onClick={disconectWallet}>Log out</Button>
+        ) : (
+          <Button onClick={connectWallet}>Log in</Button>
+        )}
       </Grid>
 
       <IconButton
@@ -142,7 +146,11 @@ export const Header: FC<Props> = (props) => {
 
         <Divider />
 
-        {currentAccount ? <Button>Log out</Button> : <Button onClick={connectWallet}>Log in</Button>}
+        {currentAccount ? (
+          <Button onClick={disconectWallet}>Log out</Button>
+        ) : (
+          <Button onClick={connectWallet}>Log in</Button>
+        )}
       </Menu>
     </Root>
   )

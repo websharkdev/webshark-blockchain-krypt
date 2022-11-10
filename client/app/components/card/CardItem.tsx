@@ -6,6 +6,8 @@ import styles from '@/components/card/card.module.sass'
 
 import { EthereumIcon, InfoIcon } from '@/assets/icons/ui'
 
+import { useCopyToClipboard } from '@/utils/hooks'
+
 type Props = {
   address: string
 }
@@ -26,6 +28,7 @@ const Root = styled(Grid)(({ theme }) => ({
 }))
 
 export const CardItem: FC<Props> = ({ address }) => {
+  const [value, addToClipboard] = useCopyToClipboard()
   return (
     <Root
       container
@@ -44,7 +47,7 @@ export const CardItem: FC<Props> = ({ address }) => {
       <Grid item width="100%">
         <Box className="card-item--container" flexDirection="column">
           <Tooltip title={address ? address : ''}>
-            <Typography variant="body2" color="#fff">
+            <Typography variant="body2" color="#fff" onClick={() => addToClipboard(address)}>
               {address ? `${address.slice(0, 6)}...${address.slice(38, 42)}` : '...'}
             </Typography>
           </Tooltip>
