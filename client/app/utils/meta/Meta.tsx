@@ -21,13 +21,6 @@ const Meta: FC<IMeta> = ({ title, children, description, image }) => {
         <link rel="manifest" href="/manifest.json" />
         <Favicons />
 
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SM1PM8W9TH"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          {/* @ts-ignore */}
-          function gtag(){dataLayer.push(arguments)}
-          gtag('js', new Date()); gtag('config', 'G-SM1PM8W9TH');
-        </script>
         {description ? (
           <>
             <meta itemProp="description" name="description" content={getOnlyText(description, 152)} />
