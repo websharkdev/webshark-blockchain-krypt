@@ -6,6 +6,14 @@ import { fonts } from '@/config/constants'
 const Document = () => (
   <Html lang="en">
     <Head>
+      {fonts.map((item: string) => (
+        <link href={item} rel="stylesheet" key={item} />
+      ))}
+    </Head>
+    <body>
+      <Main />
+      <NextScript />
+
       <Script
         strategy="lazyOnload"
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
@@ -21,13 +29,6 @@ const Document = () => (
             });
         `}
       </Script>
-      {fonts.map((item: string) => (
-        <link href={item} rel="stylesheet" key={item} />
-      ))}
-    </Head>
-    <body>
-      <Main />
-      <NextScript />
     </body>
   </Html>
 )
